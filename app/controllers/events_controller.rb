@@ -4,12 +4,15 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all
+    @events = Event.by_recent
   end
 
   # GET /events/1
   # GET /events/1.json
   def show
+    if @event.private && !User.viewable_by(current_user, @event.user)
+       redirect_to events_path, :alert => "Access denied."
+    end
   end
 
   # GET /events/new
@@ -24,10 +27,14 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event = Event.new(event_params)
+    if current_user
+      @event = current_user.events.build(event_params)
+    else
+      @event = Event.new(event_params)
+    end
 
     respond_to do |format|
-      if @event.save        
+      if @event.save
         format.html { redirect_to @event, :flash => { :success => 'Event was successfully created.' }}
         format.json { render :show, status: :created, location: @event }
       else
@@ -54,10 +61,14 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    @event.destroy
-    respond_to do |format|
-      format.html { redirect_to events_url, :flash => { :info => 'Event was successfully destroyed.' }}
-      format.json { head :no_content }
+    if @event.private && !User.viewable_by(current_user, @event.user)
+      @event.destroy
+      respond_to do |format|
+        format.html { redirect_to events_url, :flash => { :info => 'Event was successfully destroyed.' }}
+        format.json { head :no_content }
+      end
+    else
+      redirect_to events_path, :alert => "Access denied."
     end
   end
 
@@ -69,6 +80,6 @@ class EventsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def event_params
-      params.require(:event).permit(:name, :date)
+      params.require(:event).permit(:name, :date, :private)
     end
 end
