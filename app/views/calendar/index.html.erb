@@ -1,0 +1,17 @@
+<div class="container mt-3">
+  <%= month_calendar events: @events do |date, events| %>
+    <%= date %>
+
+    <% events.each do |event| %>
+      <div>
+        <% if !event.private || current_user == event.user %>
+          <%= link_to event_path(event), class: "text-dark", style: "text-decoration: none" do%>
+            <%= event.name %>
+          <% end %>
+        <% else %>
+          <%= event.name %>
+        <% end %>
+      </div>
+    <% end %>
+  <% end %>
+</div>
