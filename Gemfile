@@ -36,8 +36,8 @@ gem 'devise'
 gem 'bootstrap', '~> 4.2.1'
 gem 'jquery-rails'
 gem 'simple_calendar', '~> 2.2', '>= 2.2.7'
-# gem "aws-sdk-s3", require: false
-gem "google-cloud-storage", "~> 1.11", require: false
+gem "aws-sdk-s3", require: false
+# gem "google-cloud-storage", "~> 1.11", require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
