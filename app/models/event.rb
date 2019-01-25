@@ -4,6 +4,7 @@ class Event < ApplicationRecord
 
   has_one_attached :image
   belongs_to :user, optional: true
+  has_many :tasks, dependent: :destroy
 
   scope :only_public,    -> { where(private: false) }
   scope :only_private,   -> { where(private: true)  }
