@@ -5,11 +5,29 @@
       <div class="card-body">
         <div class="h1 mb-3">
           <%= @event.name %>
+          <% if @event.private %>
+            <i class="material-icons text-danger" id="lock">lock_outline</i>
+          <% end %>
+          <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-info btn-sm ml-2" %>
         </div>
         <%= formatted_date(@event.date) %>
         <div class="mt-3">
-          <%= link_to 'Edit', edit_event_path(@event), class: "btn btn-info btn-sm" %>
+          <%= link_to 'Add Task', new_event_task_path(params[:id]), class: "btn btn-success btn-sm ml-1" %>
         </div>
+        <div class="mt-3">
+          <% @event.tasks.each do |task| %>
+          <div class="card-header mt-1">
+            <%= task.name %>
+
+            <%= link_to edit_event_task_path(task.event, task), class: "float-right text-success", style: "text-decoration: none" do%>
+              <i class="material-icons">edit</i>
+            <% end %>
+            <%= link_to [task.event, task], :method => :delete, class: "float-right text-danger", style: "text-decoration: none" do%>
+              <i class="material-icons">delete</i>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
       </div>
     </div>
   </div>

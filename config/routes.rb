@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   devise_for :users
 
-  root to: "home#index"
+  root to: "calendar#index"
 
-  get 'home/index'
-  resources :events
+  resources :events do
+      resources :tasks
+    end
+    
+  get 'calendar' => 'calendar#index'
 end
