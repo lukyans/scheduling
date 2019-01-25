@@ -1,0 +1,13 @@
+<p id="notice"><%= notice %></p>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-9 col-md-7 col-lg-6">
+      <div class="card-body">
+        <div class="h1 mb-3">
+          <%= @task.name %>
+          <%= link_to 'Edit', edit_event_task_path(@task.event, @task), class: "btn btn-info btn-sm ml-2" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
