@@ -5,6 +5,9 @@
       <div class="card-body">
         <div class="h1 mb-3">
           <%= @event.name %>
+          <% if @event.private %>
+            <i class="material-icons text-danger" id="lock">lock_outline</i>
+          <% end %>
         </div>
         <%= formatted_date(@event.date) %>
         <div class="mt-3">
