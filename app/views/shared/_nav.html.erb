@@ -1,10 +1,20 @@
 <nav class="navbar navbar-light" style="background-color: #563d7c">
   <%= link_to "SKD", root_path, class: "navbar-brand font-weight-bold text-light", style: "text-decoration: none" %>
   <ul class="nav">
+    <li class="nav-item mr-1">
+      <button type="button" class="btn btn-default navbar-btn">
+        <%= link_to "Events", events_path, class: "text-light", style: "text-decoration: none" %>
+      </button>
+    </li>
+    <li class="nav-item mr-1">
+      <button type="button" class="btn btn-outline-warning">
+        <%= link_to "Calendar", calendar_path, class: "text-warning", style: "text-decoration: none" %>
+      </button>
+    </li>
     <% if user_signed_in? %>
       <li class="nav-item">
         <button type="button" class="btn btn-default navbar-btn">
-          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-dark", style: "text-decoration: none" %>
+          <%= link_to "Sign Out", destroy_user_session_path, method: :delete, class: "text-light", style: "text-decoration: none" %>
         </button>
       </li>
     <% else %>
@@ -12,7 +22,7 @@
         <button type="button" class="btn btn-default navbar-btn">
           <%= link_to "Log In", new_user_session_path, method: :get, class: "text-light", style: "text-decoration: none" %>
         </button>
-      </li>      
+      </li>
     <% end %>
   </ul>
 </nav>
