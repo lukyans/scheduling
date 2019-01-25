@@ -61,14 +61,10 @@ class EventsController < ApplicationController
   # DELETE /events/1
   # DELETE /events/1.json
   def destroy
-    if @event.private && !User.viewable_by(current_user, @event.user)
-      @event.destroy
-      respond_to do |format|
-        format.html { redirect_to events_url, :flash => { :info => 'Event was successfully destroyed.' }}
-        format.json { head :no_content }
-      end
-    else
-      redirect_to events_path, :alert => "Access denied."
+    @event.destroy
+    respond_to do |format|
+      format.html { redirect_to events_url, :flash => { :info => 'Event was successfully deleted.' }}
+      format.json { head :no_content }
     end
   end
 
