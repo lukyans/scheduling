@@ -15,7 +15,12 @@
     <%= f.label :name %><br />
     <%= f.text_field :name, class: "form-control" %>
   </div>
-  <div class="actions">
+
+  <%= f.label :Priority %><br />
+  <%= f.select :priority, options_for_select(["High","Medium", "Low"], selected: @task.priority || nil),
+            include_blank: true, class:'form-control m-b' %>
+
+  <div class="actions mt-4">
     <%= f.submit class: "btn btn-info" %>
   </div>
 <% end %>
