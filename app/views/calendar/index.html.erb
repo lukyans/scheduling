@@ -1,7 +1,9 @@
 <div class="container mt-3">
   <%= month_calendar events: @events do |date, events| %>
     <%= date %>
-
+    <%= link_to new_event_path, class: "float-right", style: "text-decoration: none" do%>
+      <i class="material-icons text-secondary" id="lock">add</i>
+    <% end %>
     <% events.each do |event| %>
       <div>
         <% if !event.private || current_user == event.user %>
