@@ -13,6 +13,17 @@ class EventsController < ApplicationController
     if @event.private && !User.viewable_by(current_user, @event.user)
        redirect_to events_path, :alert => "Access denied."
     end
+
+    @scope = @event.tasks
+    if params[:sort_by] == "High"
+      @tasks = @scope.by_high
+    elsif params[:sort_by] == "Medium"
+      @tasks = @scope.by_medium
+    elsif params[:sort_by] == "Low"
+      @tasks = @scope.by_low
+    else
+      @tasks = @scope
+    end
   end
 
   # GET /events/new
