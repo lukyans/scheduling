@@ -18,33 +18,33 @@
             </div>
           </div>
 
-            <div class="col-3">
-              <% if !@tasks.empty? && @tasks.length > 1 %>
-                <ul class="navbar-nav mr-2">
-                  <li class="nav-link align-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Sort by
-                  </li>
-                  <div class="dropdown-menu dropdown-menu-right mr-3">
-                    <button class="dropdown-item font-weight-light" type="button">
-                      <%= link_to 'All', event_path(@event, sort_by: "All"), class: "text-dark", style: "text-decoration: none" %>
-                    </button>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item font-weight-light" type="button">
-                      <%= link_to 'High', event_path(@event, sort_by: "High"), class: "text-dark", style: "text-decoration: none" %>
-                    </button>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item font-weight-light" type="button">
-                      <%= link_to 'Medium', event_path(@event, sort_by: "Medium"), class: "text-dark", style: "text-decoration: none" %>
-                    </button>
-                    <div class="dropdown-divider"></div>
-                    <button class="dropdown-item font-weight-light" type="button">
-                      <%= link_to 'Low', event_path(@event, sort_by: "Low"), class: "text-dark", style: "text-decoration: none" %>
-                    </button>
-                  </div>
-                </ul>
-              <% end %>
-            </div>
+          <div class="col-3">
+            <% if !@tasks.empty? && @tasks.length > 1 %>
+              <ul class="navbar-nav mr-2">
+                <li class="nav-link align-right dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Sort by
+                </li>
+                <div class="dropdown-menu dropdown-menu-right mr-3">
+                  <button class="dropdown-item font-weight-light" type="button">
+                    <%= link_to 'All', event_path(@event, sort_by: "All"), class: "text-dark", style: "text-decoration: none" %>
+                  </button>
+                  <div class="dropdown-divider"></div>
+                  <button class="dropdown-item font-weight-light" type="button">
+                    <%= link_to 'High', event_path(@event, sort_by: "High"), class: "text-dark", style: "text-decoration: none" %>
+                  </button>
+                  <div class="dropdown-divider"></div>
+                  <button class="dropdown-item font-weight-light" type="button">
+                    <%= link_to 'Medium', event_path(@event, sort_by: "Medium"), class: "text-dark", style: "text-decoration: none" %>
+                  </button>
+                  <div class="dropdown-divider"></div>
+                  <button class="dropdown-item font-weight-light" type="button">
+                    <%= link_to 'Low', event_path(@event, sort_by: "Low"), class: "text-dark", style: "text-decoration: none" %>
+                  </button>
+                </div>
+              </ul>
+            <% end %>
           </div>
+        </div>
 
         <div class="mt-3">
           <% @tasks.each do |task| %>
@@ -76,6 +76,16 @@
           <% end %>
         </div>
       </div>
+    </div>
+    <div class="col-6 mt-4">
+      <p>
+        <strong>Attachments:</strong>
+        <ul>
+          <% @event.attachments.each do |attach| %>
+          <li><%= link_to attach.filename, upload_path(attach.blob.key, disposition: :attachment), style: "text-decoration: none" %></li>
+          <% end %>
+        </ul>
+      </p>
     </div>
   </div>
 </div>

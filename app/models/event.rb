@@ -2,7 +2,7 @@ class Event < ApplicationRecord
   validates :name, presence: true
   validates :date, presence: true
 
-  has_one_attached :image
+  has_many_attached :attachments
   belongs_to :user, optional: true
   has_many :tasks, dependent: :destroy
 
