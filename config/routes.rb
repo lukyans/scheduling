@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   resources :events do
       resources :tasks
     end
-    
+
   get 'calendar' => 'calendar#index'
+  resources :uploads
 end
